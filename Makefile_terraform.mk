@@ -1,39 +1,34 @@
-init:
-	terraform init
-
-workspace_create:
+tf_ws_create:
 	terraform workspace new ${WORKSPACE}
 
-workspace_select:
+tf_ws_select:
 	terraform workspace select ${WORKSPACE}
 
-workspace_delete:
+tf_ws_delete:
 	terraform workspace delete -force ${WORKSPACE}
 
-workspace_list:
+tf_ws_list:
 	terraform workspace list
 
-plan:
+tf_init:
+	terraform init
+
+tf_plan:
 	terraform plan -var-file=${TFVARS}
 
-apply:
+tf_apply:
 	terraform apply -var-file=${TFVARS} 
 
-resource-group:
-
-	terraform apply -target="module.groups" -var-file=${TFVARS}
-
-
-vnet:
-	terraform apply -target="module.vnet" -var-file=${TFVARS}
-
-vm01:
-	terraform apply -target="module.vm01" -var-file=${TFVARS}
-
-
-destroy:
+tf_destroy:
 	terraform destroy -var-file=${TFVARS} 
 
-up: workspace_create init plan
+tf_start: tf_ws_create tf_init tf_plan
 
-down:  destroy workspace_delete
+tf_cleanup:
+	rm -Rf .terraform
+	rm -Rf terraform.tfstate.d
+	
+
+
+tf_target_apply:
+	terraform apply -target="${TARGET_APPLY}" -var-file=${TFVARS}
