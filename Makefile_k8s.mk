@@ -13,7 +13,7 @@ aks_acr_secret:
 aks_create_stack:
 	kubectl apply -f ./k8s --record
 
-aks_start: aks_create_ns aks_acr_secret aks_create_stack
+aks_start: aks_create_ns aks_acr_secret
 
 aks_stop: aks_delete_ns
 
@@ -24,7 +24,8 @@ aks_status:
 aks_events:
 	kubectl -n $(NAMESPACE) get events
 
-
+aks_decode:
+	@echo "$(SECRET)" | base64 --decode
 
 # Ingress Nginx Basic Authentication
 ## FROM https://kubernetes.github.io/ingress-nginx/examples/auth/basic/
