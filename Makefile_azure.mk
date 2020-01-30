@@ -4,4 +4,4 @@ aks_context:
 
 # Create a container registry
 acr_create:
-	az acr create --name $(ACR_NAME)  --subscription $(AKS_SUBS) --resource-group $(AKS_RG) --sku Basic --location $(LOCATION)
+	az acr create --name $(ACR_NAME)  --subscription $(AKS_SUBS) --resource-group $(AKS_RG) --sku Basic --location $(LOCATION) --admin-enabled=true --tags $(TAGS)
