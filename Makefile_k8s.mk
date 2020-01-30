@@ -46,7 +46,7 @@ endef
 export INSTRUCTIONS
 
 aks_ing_basic_auth:
-	htpasswd -cb auth $(USR) $(PWD)
+	htpasswd -cb auth $(USR) $(PASSW)
 	kubectl create secret generic basic-auth --from-file=auth
 	kubectl get secret basic-auth -o yaml > basic-auth-secret.yaml
 	rm -Rf auth
