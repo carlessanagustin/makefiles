@@ -1,3 +1,6 @@
+d_build:
+	docker build -t $(IMAGE) $(DOCKERFILE)
+
 d_run:
 	docker run --rm -d -p 4040:4040 -p 5050:5050 $(IMAGE)
 	
